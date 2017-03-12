@@ -16,11 +16,15 @@ $app->get('/', function () use ($app) {
 ;
 
 $app->get('/build/{gistId}', function ($gistId) use ($app) {
-    
+
     $options  = array('http' => array('user_agent'=> $_SERVER['HTTP_USER_AGENT']));
     $context  = stream_context_create($options);
     $url = 'https://api.github.com/gists/'.$gistId;
-    $json = file_get_contents($url, false, $context);
+
+    if (false === $json = file_get_contents($url, false, $context)) {
+        return $app->redirect('/404');
+    }
+
     $gist = json_decode($json);
     $contentUrl = $gist->{'files'}->{'index.md'}->{'raw_url'};
     $content = file_get_contents($contentUrl, false, $context);
@@ -56,7 +60,8 @@ $app->get('/build/{gistId}', function ($gistId) use ($app) {
     ->setDestinationDir($dir)
     ->build();
 
-    return $app['twig']->render('build.html.twig', array('content' => $content));
+    //return $app['twig']->render('build.html.twig', array('content' => $content));
+    return $app->redirect('/'.$gistId);
 });
 
 $app->error(function (\Exception $e, Request $request, $code) use ($app) {
