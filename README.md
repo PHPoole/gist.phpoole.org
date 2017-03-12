@@ -1,6 +1,8 @@
 # gist.phpoole.org
 
-> Turns a GitHub Gist in a static Web page.
+> Turns a GitHub Gist into a static Web page.
+
+:warning: This is a Proof of Concept!
 
 ## Installation
 
@@ -16,4 +18,4 @@ $ composer install
 $ php -S localhost:8888 -t web
 ```
 
-Visit <http://localhost:8888/>
+Visit <http://localhost:8888/> and put a Gist ID in the input form (ie: `f00d643bd2b6620e8e7a65e1229b4acf` from https://gist.github.com/Narno/f00d643bd2b6620e8e7a65e1229b4acf).
