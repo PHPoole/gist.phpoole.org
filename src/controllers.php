@@ -5,12 +5,31 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use PHPoole\PHPoole;
 
 //Request::setTrustedProxies(array('127.0.0.1'));
 
-$app->get('/', function () use ($app) {
-    return $app['twig']->render('index.html.twig', array());
+$app->match('/', function (Request $request) use ($app) {
+    $data = array(
+        'gist' => 'f00d643bd2b6620e8e7a65e1229b4acf',
+    );
+
+    $form = $app['form.factory']->createBuilder(FormType::class, $data)
+        ->add('gist')
+        ->getForm();
+    $form->handleRequest($request);
+
+    if ($form->isValid()) {
+        $data = $form->getData();
+
+        return $app->redirect('/build/'.$data['gist']);
+    }
+
+    //return $app['twig']->render('index.html.twig', array());
+    return $app['twig']->render('index.html.twig', array('form' => $form->createView()));
 })
 ->bind('homepage')
 ;

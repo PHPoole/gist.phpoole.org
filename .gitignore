@@ -1,1 +1,7 @@
 /vendor/
+/web/*
+!/web/css
+!/web/layouts
+!/web/static
+!/web/index.php
+!/web/index_dev.php
