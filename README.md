@@ -16,4 +16,4 @@ $ composer install
 $ php -S localhost:8888 -t web
 ```
 
-Visit <http://localhost:8888/build/GIST_ID> (replace `GIST_ID`)
+Visit <http://localhost:8888/>
