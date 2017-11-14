@@ -49,8 +49,7 @@ $app->get('/build/{gistId}', function ($gistId) use ($app) {
     $contentUrl = $gist->{'files'}->{'index.md'}->{'raw_url'};
     $content = file_get_contents($contentUrl, false, $context);
 
-    //$dir = __DIR__.'/../web/p/';
-    $dir = '/app/web/p/';
+    $dir = realpath(__DIR__.'/../web/p/').'/';
     if (!is_dir($dir.$gistId)) {
         mkdir($dir.$gistId, 0700);
     }
@@ -59,7 +58,7 @@ $app->get('/build/{gistId}', function ($gistId) use ($app) {
     PHPoole::create(
         [
             'site' => [
-                'title'       => "gist.phpoole.org",
+                'title'       => 'gist.phpoole.org',
                 'description' => '',
                 'baseurl'     => $app['url'].'p/'.$gistId.'/',
             ],
