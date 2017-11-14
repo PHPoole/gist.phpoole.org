@@ -49,11 +49,11 @@ $app->get('/build/{gistId}', function ($gistId) use ($app) {
     $contentUrl = $gist->{'files'}->{'index.md'}->{'raw_url'};
     $content = file_get_contents($contentUrl, false, $context);
 
-    $dir = __DIR__.'/../web';
-    if (!is_dir($dir.'/p/'.$gistId)) {
-        mkdir($dir.'/p/'.$gistId, 0700);
+    $dir = __DIR__.'/../web/p/';
+    if (!is_dir($dir.$gistId)) {
+        mkdir($dir.$gistId, 0700);
     }
-    file_put_contents($dir.'/p/'.$gistId.'/index.md', $content);
+    file_put_contents($dir.$gistId.'/index.md', $content);
 
     PHPoole::create(
         [
@@ -63,16 +63,16 @@ $app->get('/build/{gistId}', function ($gistId) use ($app) {
                 'baseurl'     => $app['url'].'p/'.$gistId.'/',
             ],
             'content' => [
-                'dir' => 'p/'.$gistId
+                'dir' => $gistId
             ],
             'output'  => [
-                'dir' => 'p/'.$gistId
+                'dir' => $gistId
             ],
             'layouts' => [
-                'dir' => 'layouts'
+                'dir' => '../layouts'
             ],
             'static' => [
-                'dir' => 'static'
+                'dir' => '../static'
             ]
         ]
     )
