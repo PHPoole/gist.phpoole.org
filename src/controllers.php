@@ -35,6 +35,7 @@ $app->match('/', function (Request $request) use ($app) {
 ;
 
 $app->get('/build/{gistId}', function ($gistId) use ($app) {
+    $app['monolog']->addDebug('logging output.');
 
     $options  = array('http' => array('user_agent'=> $_SERVER['HTTP_USER_AGENT']));
     $context  = stream_context_create($options);

@@ -5,6 +5,8 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
+        "monolog/monolog": "^1.22",
+        "narno/phpoole-library": "1.4",
         "silex/silex": "~2.0",
         "silex/web-profiler": "~2.0",
         "symfony/asset": "~2.8|3.0.*",
@@ -21,8 +23,7 @@
         "symfony/security": "~2.8|3.0.*",
         "symfony/translation": "~2.8|3.0.*",
         "symfony/twig-bridge": "~2.8|3.0.*",
-        "symfony/validator": "~2.8|3.0.*",
-        "narno/phpoole-library": "1.4"
+        "symfony/validator": "~2.8|3.0.*"
     },
     "autoload": {
         "psr-0": { "": "src/" }
