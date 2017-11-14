@@ -42,7 +42,7 @@ $app->get('/build/{gistId}', function ($gistId) use ($app) {
     $url = 'https://api.github.com/gists/'.$gistId;
 
     if (false === $json = file_get_contents($url, false, $context)) {
-        return $app->redirect('/404');
+        //return $app->redirect('/404');
     }
 
     $gist = json_decode($json);
