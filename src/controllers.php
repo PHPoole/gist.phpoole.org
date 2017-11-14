@@ -42,7 +42,7 @@ $app->get('/build/{gistId}', function ($gistId) use ($app) {
     $url = 'https://api.github.com/gists/'.$gistId;
 
     if (false === $json = file_get_contents($url, false, $context)) {
-        //return $app->redirect('/404');
+        return $app->redirect('/404');
     }
 
     $gist = json_decode($json);
@@ -50,23 +50,23 @@ $app->get('/build/{gistId}', function ($gistId) use ($app) {
     $content = file_get_contents($contentUrl, false, $context);
 
     $dir = __DIR__.'/../web';
-    if (!is_dir($dir.'/'.$gistId)) {
-        mkdir($dir.'/'.$gistId, 0700);
+    if (!is_dir($dir.'/p/'.$gistId)) {
+        mkdir($dir.'/p/'.$gistId, 0700);
     }
-    file_put_contents($dir.'/'.$gistId.'/index.md', $content);
+    file_put_contents($dir.'/p/'.$gistId.'/index.md', $content);
 
     PHPoole::create(
         [
             'site' => [
-                'title'       => "gist phpoole.org",
+                'title'       => "gist.phpoole.org",
                 'description' => '',
-                'baseurl'     => 'http://localhost:8888/'.$gistId.'/',
+                'baseurl'     => 'http://localhost:8888/p/'.$gistId.'/',
             ],
             'content' => [
-                'dir' => $gistId
+                'dir' => 'p/'.$gistId
             ],
             'output'  => [
-                'dir' => $gistId
+                'dir' => 'p/'.$gistId
             ],
             'layouts' => [
                 'dir' => 'layouts'
@@ -81,7 +81,7 @@ $app->get('/build/{gistId}', function ($gistId) use ($app) {
     ->build();
 
     //return $app['twig']->render('build.html.twig', array('content' => $content));
-    return $app->redirect('/'.$gistId);
+    return $app->redirect('/p/'.$gistId);
 });
 
 $app->error(function (\Exception $e, Request $request, $code) use ($app) {

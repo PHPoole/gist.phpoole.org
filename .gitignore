@@ -2,6 +2,7 @@
 /web/*
 !/web/css
 !/web/layouts
+!/web/p
 !/web/static
 !/web/.htaccess
 !/web/index.php
