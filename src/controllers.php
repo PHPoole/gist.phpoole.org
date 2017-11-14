@@ -49,7 +49,8 @@ $app->get('/build/{gistId}', function ($gistId) use ($app) {
     $contentUrl = $gist->{'files'}->{'index.md'}->{'raw_url'};
     $content = file_get_contents($contentUrl, false, $context);
 
-    $dir = __DIR__.'/../web/p/';
+    //$dir = __DIR__.'/../web/p/';
+    $dir = '/app/web/p/';
     if (!is_dir($dir.$gistId)) {
         mkdir($dir.$gistId, 0700);
     }
