@@ -60,7 +60,7 @@ $app->get('/build/{gistId}', function ($gistId) use ($app) {
             'site' => [
                 'title'       => "gist.phpoole.org",
                 'description' => '',
-                'baseurl'     => 'http://localhost:8888/p/'.$gistId.'/',
+                'baseurl'     => $app['url'].'p/'.$gistId.'/',
             ],
             'content' => [
                 'dir' => 'p/'.$gistId
