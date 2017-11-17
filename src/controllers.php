@@ -14,7 +14,7 @@ use PHPoole\PHPoole;
 
 $app->match('/', function (Request $request) use ($app) {
     $data = array(
-        'gist' => 'f00d643bd2b6620e8e7a65e1229b4acf',
+        'gist' => $app['gist.default'],
     );
 
     $form = $app['form.factory']->createBuilder(FormType::class, $data)

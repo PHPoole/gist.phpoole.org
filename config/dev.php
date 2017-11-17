@@ -18,3 +18,4 @@ $app->register(new WebProfilerServiceProvider(), array(
 ));
 
 $app['url'] = 'http://localhost:8888/';
+$app['gist.default'] = 'f00d643bd2b6620e8e7a65e1229b4acf';
